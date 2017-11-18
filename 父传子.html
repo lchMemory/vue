@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<hello mycolor="red"></hello>
+		<hello mycolor="blue"></hello>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+	var child={
+		template:`<div :style={background:mycolor}>hhhhhhhhhhhhhhh{{mycolor}}</div>`,
+		props:["mycolor"]
+	}
+		new Vue({
+			el:'#box',
+			components:{
+				'hello':child
+			}
+		})
+	</script>
+</body>
+</html>

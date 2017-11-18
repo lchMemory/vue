@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<hello @lch="success"></hello>
+		{{msg}}
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var child={
+			template:`<input type="text" @input="handelput">`,
+			methods:{
+				handelput(ev){
+					this.$emit('lch',ev.target.value)
+				}
+			}
+		}
+		new Vue({
+			el:"#box",
+			data:{
+				msg:''
+			},
+			components:{
+				"hello":child
+			},
+			methods:{
+				success(value){
+					this.msg=value
+				}
+			}
+		})
+	</script>
+</body>
+</html>

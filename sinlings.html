@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<storage1></storage1>
+		<storage2></storage2>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var bus=new Vue()
+		var child1={
+			template:`<div>我是兄弟组件一
+				<button @click="handel">传数据</button>
+			</div>`,
+			methods:{
+				handel(){
+					bus.$emit('kerwin','aaa')
+				}
+			}
+		}
+		var child2={
+			template:`<div>我是兄弟组件二{{vvv}}</div>`,
+			data(){
+				return{
+					vvv:''	
+				}
+			},
+			mounted(){
+				console.log('执行')
+				bus.$on('kerwin',function(value){
+					console.log('来自兄弟的问候'+value)
+					console.log(this)
+					this.vvv=value
+				})
+			}
+		}
+		new Vue({
+			el:"#box",
+			components:{
+				'storage1':child1,
+				'storage2':child2
+			}
+		})
+	</script>
+</body>
+</html>
