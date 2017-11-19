@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<s1></s1>
+		<s2></s2>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var bus = new Vue();
+		var child1={
+			template:`<div>我是兄弟组件1 <button @click="handelClick">点我发送</button></div>`,
+			methods:{
+				handelClick:function(){
+					bus.$emit('fabu','aaaa')
+				}
+			}
+		}
+		var child2={
+			template:`<div>我是兄弟组件2</div>`,
+			mounted(){
+				console.log('组件加载完成')
+				bus.$on('fabu',function(value){
+						console.log('组件2 收到组件一的值是：'+value)
+				})
+			}
+		}
+		new Vue({
+			el:"#box",
+			components:{
+				"s1":child1,
+				"s2":child2
+			}
+		})
+	</script>
+</body>
+</html>

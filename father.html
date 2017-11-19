@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box2">
+		<hello2 mycolor="red"></hello2>
+		<hello2 mycolor="blue"></hello2>
+	</div>
+	<script src="vue.js"></script>
+	<script>
+		var child={
+			template:`<div :style={background:mycolor}>父传子属性值 {{mycolor}}</div>`,
+			props:['mycolor']
+		} 
+		new Vue({
+					el:"#box2",
+					components:{
+						'hello2':child
+					}
+				})
+	</script>
+	
+</body>
+</html>

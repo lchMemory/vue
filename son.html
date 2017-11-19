@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box">
+		<hello @out="changemsg"></hello>
+		{{msg}}
+	</div>
+	<script src="vue.js"></script>
+	<script>
+	var child={
+		template:`<input type="text" @input="handel">`,
+		methods:{
+			handel(ev){
+				this.$emit('out',ev.target.value)
+			}
+		}
+	}
+		new Vue({
+			el:'#box',
+			components:{
+				'hello':child
+			},
+			data:{
+				msg:''
+			},
+			methods:{
+				changemsg(value){
+					this.msg=value
+				}
+			}
+		})
+	</script>
+</body>
+</html>
